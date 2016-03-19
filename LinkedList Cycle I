@@ -1,0 +1,46 @@
+//Given a linked list, determine if it has a cycle in it.
+//follow up: if do not use additional space
+public boolean hasCycle(ListNode head){
+	if(head == null) return false;
+	//store all nodes in hashmap, and then check it one by one
+	HashMap<ListNode,Integer> hm = new HashMap<>();
+	//ListNode dummy = null;
+	//dummy.next = head;
+	ListNode cur = head;
+	while(cur != null){
+		if(hm.containsKey(cur)){
+			return true;
+		}
+		hm.put(cur,0);
+		cur = cur.next;
+	}
+	return false;
+}
+
+//follow up: not using additional space
+public boolean isCycle2(ListNode head){//wait to be modified
+	if(head == null) return false;
+	//use two pointers, compare with each other every time. 
+	ListNode cur = head;
+	ListNode cur2 = head.next;
+	int i = 0;
+	cur.val = 0;
+	cur2.val =1;
+	//check first two elements
+	if(cur2.next == cur) return true;
+	
+	while(cur2 != null){
+		if(cur2.val > cur.val) return true;
+		//update valie of nodes
+		cur.val = i;
+		cur2.val = i+1;
+		i = i + 1;
+		//iteration
+		cur = cur.next;
+		cur2 = cur2.next;
+	}
+	return false;
+}
+		  
+		
+	

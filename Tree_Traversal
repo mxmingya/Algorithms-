@@ -1,0 +1,41 @@
+//preorder traversal
+public void preorder_traversal(TreeNode root){
+	//visit every parent before visiting their children 
+	if(root == null) return null;
+	visit(root);
+	if(root.left != null) return preorder_traversal(root.left);
+	if(root.right != null) return preorder_traversal(root.right);
+}
+
+//postorder traversal
+public void postorder_traversal(TreeNode root){
+	//postorder traversal is visit all the children before visit their parents
+	if(root == null) return;
+	if(root.left != null) return postorder_traversal(root.left);
+	if(root.right != null) return postorder_traversal(root.right);
+	visit(root);
+}
+
+//inorder traversal
+public void inorder_traversal(TreeNode root){
+	//inorder traversal is visit the left child, then parent, the right child comes last
+	if(root == null) return;
+	if(root.left != null) return inoder_tranversal(root.left);
+	visit(root.left);
+	if(root.right != null) return inorder_traversal(root.right);
+}
+
+public void visit(TreeNode root){
+	System.out.println(root.val);
+}
+
+public class TreeNode{
+	int val;
+	TreeNode left;
+	TreeNode right;
+	public TreeNode(int val){
+		this.val = val;
+		left = null;
+		right = null;
+	}
+}

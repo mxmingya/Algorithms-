@@ -1,0 +1,34 @@
+/*Triple Step, or called "Find Exchanges", is just simply dynamic programming, 
+or a instance of a memoization
+Q: A child step on a staircase which has n steps, he can hop up 1 step, 2 step,
+or 3 steps if he wants, and find out how many combinations of ways that he can
+go up n steps*/
+public int countWays(int n){
+	/*base case: if n = 0, he has one ways to step, also count add 1 since he 
+	reaches the destiny
+	if n < 0, that indicates that this combination does not work well*/
+	if(n < 0) return 0;
+	if(n ==0) return 1;//one more ways to hop up
+	return countWays(n - 1) + countWays(n - 2) + countWays(n -3);
+}
+/*the complexity of this algorithm is not adorable, which is O(3^n), pretty 
+much same as Fibonacci Sequence. However we can optimalize it by using 
+memoization like what we have below.*/
+
+public int countWays(int n){
+	int[] arr = new int[n + 1]; /*still confused by why n + 1 here, anyone helps?*/
+	Arrays.fill(arr,-1);
+	return countWays(n,arr);
+}
+public int countWays(int n, int[] arr){
+	/*helper function for countWays, that add up the ways of hopping to the top*/
+	//base case
+	if(n < 0) return 0;
+	if(n ==0) return 1;
+	if(arr[n] == -1){
+		//this slot havent be filled
+		arr[n] = countWays(n-1,arr) + countWays(n-2,arr) + countWays(n-3,arr);
+	}
+	return arr[n];
+}
+/*the above follow-up optimalizes the algorithms into O(n) instead of O(3^n)*/ 
